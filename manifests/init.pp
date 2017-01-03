@@ -44,7 +44,7 @@
 #
 
 class teamspeak (
-    $version         = $teamspeak::params::version,
+    $ts3version      = $teamspeak::params::ts3version,
     $arch            = $teamspeak::params::download_arch,
     $mirror          = $teamspeak::params::mirror,
     $license_file    = undef,
@@ -94,7 +94,7 @@ class teamspeak (
     cwd     => "${home}/downloads",
     user    => $user,
     group   => $group,
-    creates => "${home}/downloads/teamspeak3-server_linux-${arch}-${version}.tar.gz",
+    creates => "${home}/downloads/teamspeak3-server_linux-${arch}-${ts3version}.tar.gz",
     require => [
       File["${home}/downloads"],
       User[$user],
@@ -103,7 +103,7 @@ class teamspeak (
   }
   
   exec { 'unpack_teamspeak':
-    command     => "tar -xzf ${home}/downloads/teamspeak3-server_linux-${arch}-${version}.tar.gz -C /opt/teamspeak/downloads",
+    command     => "tar -xzf ${home}/downloads/teamspeak3-server_linux-${arch}-${ts3version}.tar.gz -C /opt/teamspeak/downloads",
     path        => '/bin',
     user        => $user,
     refreshonly => true,
